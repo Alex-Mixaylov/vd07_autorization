@@ -5,11 +5,11 @@ from app.models import User
 import random
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(), Length(min=2, max=35)])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Sign Up')
+    username = StringField('Имя пользователя', validators=[DataRequired(), Length(min=2, max=35)])
+    email = StringField('Электронная почта', validators=[DataRequired(), Email()])
+    password = PasswordField('Пароль', validators=[DataRequired()])
+    confirm_password = PasswordField('Подтверждение пароля', validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Зарегистрироваться')
 
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
@@ -22,19 +22,19 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('Такая почта уже используется')
 
 class LoginForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
+    email = StringField('Электронная почта', validators=[DataRequired(), Email()])
+    password = PasswordField('Пароль', validators=[DataRequired()])
     remember = BooleanField('Запомни меня')
-    submit = SubmitField('Login')
+    submit = SubmitField('Войти')
 
 class UpdateAccountForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(), Length(min=2, max=35)])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    old_password = PasswordField('Old Password', validators=[DataRequired()])
-    new_password = PasswordField('New Password', validators=[Length(min=6)])
-    confirm_new_password = PasswordField('Confirm New Password', validators=[EqualTo('new_password')])
-    captcha = StringField('What is {{ captcha_num1 }} + {{ captcha_num2 }}?', validators=[DataRequired()])
-    submit = SubmitField('Update')
+    username = StringField('Имя пользователя', validators=[DataRequired(), Length(min=2, max=35)])
+    email = StringField('Электронная почта', validators=[DataRequired(), Email()])
+    old_password = PasswordField('Старый пароль', validators=[DataRequired()])
+    new_password = PasswordField('Новый пароль', validators=[Length(min=6)])
+    confirm_new_password = PasswordField('Подтверждение нового пароля', validators=[EqualTo('new_password')])
+    captcha = StringField(validators=[DataRequired()])
+    submit = SubmitField('Обновить')
 
     def __init__(self, current_user, *args, **kwargs):
         super(UpdateAccountForm, self).__init__(*args, **kwargs)
