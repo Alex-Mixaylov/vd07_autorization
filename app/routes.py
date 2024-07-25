@@ -22,7 +22,7 @@ def register():
         db.session.commit()
         flash('Вы успешно зарегистрировались!', 'success')
         return redirect(url_for('login'))
-    return render_template('register.html', form=form, title='Register')
+    return render_template('register.html', form=form, title='Регистрация')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -35,8 +35,8 @@ def login():
             login_user(user, remember=form.remember.data)
             return redirect(url_for('home'))
         else:
-            flash('Введены неверные данные')
-    return render_template('login.html', form=form, title='Login')
+            flash('Неверные данные для входа', 'danger')
+    return render_template('login.html', form=form, title='Вход')
 
 @app.route('/logout')
 def logout():
@@ -70,4 +70,4 @@ def account():
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
-    return render_template('account.html', form=form, title='Account', captcha_num1=session['captcha_num1'], captcha_num2=session['captcha_num2'])
+    return render_template('account.html', form=form, title='Аккаунт', captcha_num1=session['captcha_num1'], captcha_num2=session['captcha_num2'])
