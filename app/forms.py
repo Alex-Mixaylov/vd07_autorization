@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from app.models import User
+import random
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=2, max=35)])
@@ -32,6 +33,7 @@ class UpdateAccountForm(FlaskForm):
     old_password = PasswordField('Old Password', validators=[DataRequired()])
     new_password = PasswordField('New Password', validators=[Length(min=6)])
     confirm_new_password = PasswordField('Confirm New Password', validators=[EqualTo('new_password')])
+    captcha = StringField('What is {{ captcha_num1 }} + {{ captcha_num2 }}?', validators=[DataRequired()])
     submit = SubmitField('Update')
 
     def __init__(self, current_user, *args, **kwargs):
