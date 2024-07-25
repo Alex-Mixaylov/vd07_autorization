@@ -11,13 +11,13 @@
 <body>
 
     <nav>
-        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('home') }}">Главная страница</a>
         {% if current_user.is_authenticated %}
-            <a href="{{ url_for('account') }}">Account</a>
-            <a href="{{ url_for('logout') }}">Logout</a>
+            <a href="{{ url_for('account') }}">Аккаунт</a>
+            <a href="{{ url_for('logout') }}">Выход</a>
         {% else %}
-            <a href="{{ url_for('login') }}">Login</a>
-            <a href="{{ url_for('register') }}">Register</a>
+            <a href="{{ url_for('login') }}">Вход</a>
+            <a href="{{ url_for('register') }}">Регистрация</a>
         {% endif %}
     </nav>
 

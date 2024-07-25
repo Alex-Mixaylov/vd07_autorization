@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-регистрация
+Регистрация
 {% endblock %}
 
 {% block content %}
@@ -9,19 +9,19 @@
 <form method="post" action="{{ url_for('register') }}">
         {{ form.hidden_tag() }}
         <div>
-            {{ form.username.label }}
+            {{ form.username.label }}<br>
             {{ form.username(size=32) }}
         </div>
         <div>
-            {{ form.email.label }}
+            {{ form.email.label }}<br>
             {{ form.email(size=32) }}
         </div>
         <div>
-            {{ form.password.label }}
+            {{ form.password.label }}<br>
             {{ form.password(size=32) }}
         </div>
         <div>
-            {{ form.confirm_password.label }}
+            {{ form.confirm_password.label }}<br>
             {{ form.confirm_password(size=32) }}
         </div>
         <div>

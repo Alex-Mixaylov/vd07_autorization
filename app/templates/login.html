@@ -9,15 +9,15 @@
 <form method="post" action="{{ url_for('login') }}">
         {{ form.hidden_tag() }}
         <div>
-            {{ form.email.label }}
+            {{ form.email.label }}<br>
             {{ form.email(size=32) }}
         </div>
         <div>
-            {{ form.password.label }}
-            {{ form.password(size=32) }}
+            {{ form.password.label }}<br>
+            {{ form.password(size=64) }}
         </div>
         <div>
-            {{ form.remember() }}
+            {{ form.remember() }}<br>
             {{ form.remember.label }}
         </div>
         <div>
