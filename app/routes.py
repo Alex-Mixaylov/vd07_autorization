@@ -45,7 +45,7 @@ def logout():
 @app.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
-    form = UpdateAccountForm()
+    form = UpdateAccountForm(current_user=current_user)
     if form.validate_on_submit():
         if bcrypt.check_password_hash(current_user.password, form.old_password.data):
             current_user.username = form.username.data
