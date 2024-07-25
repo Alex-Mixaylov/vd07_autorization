@@ -47,14 +47,17 @@ def logout():
 def account():
     form = UpdateAccountForm()
     if form.validate_on_submit():
-        current_user.username = form.username.data
-        current_user.email = form.email.data
-        if form.password.data:
-            hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-            current_user.password = hashed_password
-        db.session.commit()
-        flash('Ваш аккаунт был обновлен!', 'success')
-        return redirect(url_for('account'))
+        if bcrypt.check_password_hash(current_user.password, form.old_password.data):
+            current_user.username = form.username.data
+            current_user.email = form.email.data
+            if form.new_password.data:
+                hashed_password = bcrypt.generate_password_hash(form.new_password.data).decode('utf-8')
+                current_user.password = hashed_password
+            db.session.commit()
+            flash('Ваш аккаунт был обновлен!', 'success')
+            return redirect(url_for('account'))
+        else:
+            flash('Неверный старый пароль', 'danger')
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
