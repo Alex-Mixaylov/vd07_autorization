@@ -34,12 +34,16 @@ class UpdateAccountForm(FlaskForm):
     confirm_new_password = PasswordField('Confirm New Password', validators=[EqualTo('new_password')])
     submit = SubmitField('Update')
 
+    def __init__(self, current_user, *args, **kwargs):
+        super(UpdateAccountForm, self).__init__(*args, **kwargs)
+        self.current_user = current_user
+
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
-        if user and user != current_user:
+        if user and user != self.current_user:
             raise ValidationError('Такое имя уже существует')
 
     def validate_email(self, email):
         email = User.query.filter_by(email=email.data).first()
-        if email and email != current_user:
+        if email and email != self.current_user:
             raise ValidationError('Такая почта уже используется')
