@@ -30,9 +30,8 @@
             {{ form.confirm_new_password(class="form-control") }}
         </div>
         <div class="form-group">
-            {{ form.captcha.label }}
+            <label class="form-label">Введите сумму {{ captcha_num1 }} + {{ captcha_num2 }}:</label>
             {{ form.captcha(class="form-control") }}
-            <small class="form-text text-muted">What is {{ captcha_num1 }} + {{ captcha_num2 }}?</small>
         </div>
         <div class="form-group">
             {{ form.submit(class="btn btn-primary") }}
